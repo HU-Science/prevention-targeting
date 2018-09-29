@@ -1,0 +1,5 @@
+﻿State,Time Period,Time Period Date Start,Time Period Date End,Category,Number of Hospitalizations,State FIPS Code
+Commonwealth,CY 2016,01/01/2016,12/31/2016,Heroin,"1,555",42
+Commonwealth,CY 2017,01/01/2017,12/31/2017,Heroin,"1,753",42
+Commonwealth,CY 2016,01/01/2016,12/31/2016,Pain Medication,"1,787",42
+Commonwealth,CY 2017,01/01/2017,12/31/2017,Pain Medication,"1,747",42
