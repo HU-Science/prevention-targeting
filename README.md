@@ -28,4 +28,4 @@ head(babies)
 # display head data
 head(newlyidentified)
 
-```{r}
+```
