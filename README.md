@@ -21,6 +21,7 @@ Find the factors to develop a recommondation system based on the composite score
 5. Drug monitoring: Sagar
 
 ## Phase 1: Identify datasets (Week 1)
+Sep 23, 2018 ~ Sep 29, 2018
 
 Team Demacian identified 22 datasets to use (more datasets maybe added while we are doing data analysis):
 
@@ -86,9 +87,18 @@ head(newlyidentified)
 ```
 
 ## Phase 2: Discover insights (Week 2)
+Sep 30, 2018 ~ Oct 6, 2018
 
 ## Phase 3: Refine insights, predictive modeling, and push the findings to a R Shiny Web App (Week 3)
+Oct 7, 2018 ~ Oct 13, 2018
 
 ## Phase 4: Prepare the PPT for the pitch (Week 4)
-
+Oct 14, 2018 ~ Oct 20, 2018
 Each topic may occupy 1 minute in the pitch
+
+Saturday, October 20th (8:00AM – 3:00PM)
+* Breakfast and snacks for a fast-paced day
+* Introduction of the Judges
+* Quiet on the set – 8:15 Team #1 begins their ‘pitch’
+* Judging by the panel and you
+* Awards and pictures
