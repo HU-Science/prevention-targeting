@@ -1,0 +1,23 @@
+---
+title: "test"
+author: "Z. Huang"
+date: "September 30, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(RCurl);library(readr)
+```
+
+```{r}
+Successful_Naloxone.link <- "https://raw.githubusercontent.com/TeamDemacian/prevention-targeting/master/data/Successful_Naloxone_Reversals_by_Law_Enforcement_Years_2014_-_June_2018_County_Drug_and_Alcohol_Program%20(1).csv"
+
+read.succ.nalo <- getURI(Successful_Naloxone.link)
+
+succ.nalo.dt <- read_csv(read.succ.nalo)
+```
+
+```{r}
+View(succ.nalo.dt)
+```
