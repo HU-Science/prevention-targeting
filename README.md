@@ -83,7 +83,6 @@ head(babies)
 
 # display head data
 head(newlyidentified)
-
 ```
 
 ## Phase 2: Discover insights (Week 2)
