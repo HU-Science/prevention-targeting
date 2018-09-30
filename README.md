@@ -8,17 +8,17 @@ The following listed how to use R to link to our Github data repository
 ## Problem/Goal Statement
 Find the factors to develop a recommondation system based on the composite scores to determine which counties in PA are more at risk for "effects".
 
-## Research Interests
+## Research Topics
 
-Overdose: Aymone
+1. Overdose: Aymone
 
-Addicted babies: Ziyuan
+2. Addicted babies: Ziyuan
 
-Methadone: Dr. Anderson and Polly
+3. Methadone: Dr. Anderson and Polly
 
-Doc: Patrick
+4. Doc: Patrick
 
-Drug monigoring: Sagar
+5. Drug monigoring: Sagar
 
 ## Phase 1: Identify datasets (Week 1)
 
