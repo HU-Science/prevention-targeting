@@ -10,11 +10,11 @@ Find the factors to develop a recommondation system based on the composite score
 
 ## Research Interests
 
-Overdose: Aymone 
-Addicted babies: Ziyuan
-Methadone: Dr. Anderson and Polly
-Doc: Patrick
-Drug monigoring: Sagar 
+Overdose: Aymone \n
+Addicted babies: Ziyuan \n
+Methadone: Dr. Anderson and Polly \n
+Doc: Patrick \n
+Drug monigoring: Sagar  \n
 
 ## Phase 1: Identify datasets (Week 1)
 
