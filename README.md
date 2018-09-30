@@ -10,7 +10,7 @@ Find the factors to develop a recommondation system based on the composite score
 
 ## Phase 1: Identify datasets (Week 1)
 
-Team Demacian identified 18 datasets to use:
+Team Demacian identified 22 datasets to use (more datasets maybe added while we are doing data analysis):
 
 ```{r}
 1	Babies_born_on_Medical_Assistance__MA__with_Neonatal_Abstinence_Syndrome__NAS__CY_2015-_2016_County_Human_Services
