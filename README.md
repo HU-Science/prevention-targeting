@@ -91,3 +91,5 @@ head(newlyidentified)
 ## Phase 3: Refine insights, predictive modeling, and push the findings to a R Shiny Web App (Week 3)
 
 ## Phase 4: Prepare the PPT for the pitch (Week 4)
+
+Each topic may occupy 1 minute in the pitch
