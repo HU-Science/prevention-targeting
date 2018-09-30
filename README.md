@@ -5,6 +5,8 @@ Our writing and coding are stored in the Dropbox folder. The data are stored in 
 
 The following listed how to use R to link to our Github data repository
 
+
+```{r}
 # load library
 library(RCurl);library(readr)
 
@@ -25,3 +27,5 @@ head(babies)
 
 # display head data
 head(newlyidentified)
+
+```{r}
