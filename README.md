@@ -88,6 +88,6 @@ head(newlyidentified)
 
 ## Phase 2: Discover insights (Week 2)
 
-## Phase 3: Refine insights and push the findings to a R Shiny Web App (Week 3)
+## Phase 3: Refine insights, predictive modeling, and push the findings to a R Shiny Web App (Week 3)
 
 ## Phase 4: Prepare the PPT for the pitch (Week 4)
