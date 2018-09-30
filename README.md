@@ -94,6 +94,7 @@ Oct 7, 2018 ~ Oct 13, 2018
 
 ## Phase 4: Prepare the PPT for the pitch (Week 4)
 Oct 14, 2018 ~ Oct 20, 2018
+
 Each topic may occupy 1 minute in the pitch
 
 Saturday, October 20th (8:00AM – 3:00PM)
