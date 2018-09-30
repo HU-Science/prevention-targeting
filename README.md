@@ -5,6 +5,7 @@ Our writing and coding are stored in the Dropbox folder. The data are stored in 
 
 The following listed how to use R to link to our Github data repository
 
+# Phase 1: Identify datasets (Week 1)
 
 ```{r}
 # load library
@@ -29,3 +30,9 @@ head(babies)
 head(newlyidentified)
 
 ```
+
+# Phase 2: Discover insights (Week 2)
+
+# Phase 3: Refine insights and push the findings to a R Shiny Web App (Week 3)
+
+# Phase 4: Prepare the PPT for the pitch (Week 4)
