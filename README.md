@@ -5,6 +5,9 @@ Our writing and coding are stored in the Dropbox folder. The data are stored in 
 
 The following listed how to use R to link to our Github data repository
 
+## Goal Statement
+Find the factors to develop a recommondation system based on the composite scores to determine which counties in PA are more at risk for "effects".
+
 ## Phase 1: Identify datasets (Week 1)
 
 Team Demacian identified 18 datasets to use:
