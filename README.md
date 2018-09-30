@@ -18,7 +18,7 @@ Find the factors to develop a recommondation system based on the composite score
 
 4. Doc: Patrick
 
-5. Drug monigoring: Sagar
+5. Drug monitoring: Sagar
 
 ## Phase 1: Identify datasets (Week 1)
 
