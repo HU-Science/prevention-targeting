@@ -20,6 +20,8 @@ Find the factors to develop a recommondation system based on the composite score
 
 5. Drug monitoring: Sagar
 
+6. Insurance and Quantity/Availability of Programs and Treatment Centers: Sarah
+
 ## Phase 1: Identify datasets (Week 1)
 Sep 23, 2018 ~ Sep 29, 2018
 
