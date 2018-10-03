@@ -16,7 +16,7 @@ Find the factors to develop a recommondation system based on the composite score
 
 3. Methadone: Dr. Anderson and Polly
 
-4. Doc: Patrick
+4. DOC: Patrick
 
 5. Drug monitoring: Sagar
 
