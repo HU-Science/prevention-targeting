@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 library(rstudioapi)
 library(readr)
+library(ggplot2)
 ```
 
 
@@ -35,7 +36,9 @@ unique(df.babies.born.ma$`Time Measure`)
 ```{r data_plot}
 df.pa.babies <- subset(df.babies.born.ma, 
                        df.babies.born.ma$`FIPS County Code` == '42000', 
-                       select=c(df.babies.born.ma$`County Name`, df.babies.born.ma$Year)
+                       select=c('County Name','Year','Count of Individuals')
                        )
-df.pa.babies
+Year <- df.pa.babies$Year
+`Count of Individuals` <- df.pa.babies$`Count of Individuals`
+qplot(Year, `Count of Individuals`,geom=c("point", "line"))
 ```
