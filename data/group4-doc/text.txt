@@ -1,0 +1,2 @@
+Count by county is count of heroin incidents/seizures
+Quantity is measured in Kilograms of heroin  
