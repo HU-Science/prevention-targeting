@@ -19,12 +19,19 @@ When you click the **Knit** button a document will be generated that includes bo
 summary(cars)
 ```
 
+```
+Here is my comment of the cars dataset. You will like it.
+```
 ## Including Plots
 
 You can also embed plots, for example:
 
 ```{r pressure, echo=FALSE}
 plot(pressure)
+```
+
+```
+Here I generated a plot of tempreature and pressure.
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
