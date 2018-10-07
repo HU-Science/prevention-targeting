@@ -1,0 +1,17 @@
+﻿Type of License,Capacity as of July 2018,Capacity as of February 2018,State,State FIPS Code
+Inpatient Hospital Detoxification,186,186,Pennsylvania,42
+Inpatient Hospital Drug-Free,185,185,Pennsylvania,42
+Inpatient Hospital Other Chemotherapy,18,0,Pennsylvania,42
+Inpatient Non-Hospital Detoxification,"1,102","1,070",Pennsylvania,42
+Inpatient Non-Hospital Drug-Free,"7,851","7,664",Pennsylvania,42
+Inpatient Non-Hospital Drug-Free Transitional Living Facility,178,158,Pennsylvania,42
+Inpatient Non-Hospital Other Chemotherapy,"2,221","2,055",Pennsylvania,42
+Outpatient Detoxification,562,574,Pennsylvania,42
+Outpatient Drug-Free,"78,387","75,154",Pennsylvania,42
+Outpatient Maintenance,"31,256","30,846",Pennsylvania,42
+Outpatient Other Chemotherapy,"20,313","18,773",Pennsylvania,42
+Partial Hospitalization Drug-Free,"4,783","4,616",Pennsylvania,42
+Partial Hospitalization Other Chemotherapy,423,285,Pennsylvania,42
+Psychiatric Hospital Detoxification,159,186,Pennsylvania,42
+Psychiatric Hospital Other Chemotherapy,74,55,Pennsylvania,42
+Psychiatric Hospital Residential Drug-Free,94,69,Pennsylvania,42
