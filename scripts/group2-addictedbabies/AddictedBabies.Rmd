@@ -1,0 +1,41 @@
+---
+title: "Addicted Babies"
+author: "Z. Huang"
+date: "October 7, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(rstudioapi)
+library(readr)
+```
+
+
+```{r load_data}
+path.scripts <- dirname(rstudioapi::getActiveDocumentContext()$path)
+path.data <- paste0(dirname(dirname(path.scripts)),'/data/')
+path.addictedbabies <- paste0(path.data,'group2-addictedbabies/')
+name.babies.born.ma <- 'Babies_born_on_Medical_Assistance__MA__with_Neonatal_Abstinence_Syndrome__NAS__CY_2015-_2016_County_Human_Services.csv'
+path.babies.born.ma <- paste0(path.addictedbabies,name.babies.born.ma)
+df.babies.born.ma <- read_csv(path.babies.born.ma)
+head(df.babies.born.ma)
+```
+
+```{r data_attributes}
+attributes(df.babies.born.ma)
+unique(df.babies.born.ma$`County Name`)
+
+# Number of NAS babies born on to MA: https://www.marchofdimes.org/baby/neonatal-abstinence-syndrome-(nas).aspx
+unique(df.babies.born.ma$Measure)
+
+unique(df.babies.born.ma$`Time Measure`)
+```
+
+```{r data_plot}
+df.pa.babies <- subset(df.babies.born.ma, 
+                       df.babies.born.ma$`FIPS County Code` == '42000', 
+                       select=c(df.babies.born.ma$`County Name`, df.babies.born.ma$Year)
+                       )
+df.pa.babies
+```
