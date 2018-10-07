@@ -91,7 +91,7 @@ head(newlyidentified)
 ## Phase 2: Discover insights (Week 2)
 Sep 30, 2018 ~ Oct 6, 2018
 
-The team went through EDA regarding the associated interested research topics. According to the attributes of the given datasets from the PA Open Data, the team has decided to use ANOVA across the different aspects. Once the ANOVA of each individual analysis is done. The team will combine the ANOVA results and set an overall (both country and county level) scoring system to evaluate PA's opioid crisis. That will guide the commonwealth administors of how to take the opiod issue under control. The indicators should contain 3 level of signals: green/amber/red.
+The team went through EDA regarding the associated interested research topics. According to the attributes of the given datasets from the PA Open Data, the team has decided to use ANOVA across the different aspects. Once the ANOVA of each individual analysis is done. The team will combine the ANOVA results and set an overall (both country and county level) scoring system to evaluate PA's opioid crisis. That will guide the commonwealth administors of how to take the opiod issue under control. The indicators should contain 3 levels of signal: green/amber/red.
 
 ## Phase 3: Refine insights, predictive modeling, and push the findings to a R Shiny Web App (Week 3)
 Oct 7, 2018 ~ Oct 13, 2018
