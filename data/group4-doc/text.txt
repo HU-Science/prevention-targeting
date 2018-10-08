@@ -1,2 +1,14 @@
-Count by county is count of heroin incidents/seizures
-Quantity is measured in Kilograms of heroin  
+Count by county is count of heroin incidents/seizures (Opioid and Fentanly counts NOT INCLUDED)
+
+Quantity of heroin is measured in Kilograms(Kg) of heroin. Quantity is the TOTAL amount of heroin Kg seized that quarter.
+
+Raw data set and data dictionary for PA Opioid seizures and arrests:
+https://data.pa.gov/Opioid-Related/Opioid-Seizures-and-Arrests-Year-2013-June-2018-Co/wmgc-6qvd
+
+Note that incidents =/= arrests. Incident count is:
+The number of PSP (PA State Police) seizure incidents associated with the reported drug. Incidents may include undercover buys, search warrants, traffic stops and other investigative encounters
+
+The "Arrests" column associates the arrest count assoicated with that specific drug in that specific quarter. Note:
+Arrests column is "The number of arrests, both felony and misdemeanor, in connection with the seizure of the reported drug."
+
+Goal will be to associate avg. seizure amount and count of incidents by quarter to the number of arrests that quarter
