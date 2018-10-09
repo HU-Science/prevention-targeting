@@ -11,4 +11,5 @@ The number of PSP (PA State Police) seizure incidents associated with the report
 The "Arrests" column associates the arrest count assoicated with that specific drug in that specific quarter. Note:
 Arrests column is "The number of arrests, both felony and misdemeanor, in connection with the seizure of the reported drug."
 
-Goal will be to associate avg. seizure amount and count of incidents by quarter to the number of arrests that quarter
+Goal will be to associate seizure amounts and count of incidents by quarter with the number of arrests per quarter
+(Note: Incidents have recorded heroin amounts too - not just arrests)
