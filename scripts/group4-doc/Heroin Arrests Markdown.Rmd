@@ -32,7 +32,7 @@ Arrests <- c(succ.docCount.dt$`Heroin Arrests`) #Y
 ```
 
 Multiple Linear Regression.
-Estimated Arrests= B0 + B1Qty + B2 Arrests + error
+Estimated Arrests= B0 + B1Qty + B2 Incidents + error
 ```{r}
  Regression <- lm( Arrests ~ Incidents + Qty)
 summary(Regression) # show results
