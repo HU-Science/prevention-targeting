@@ -20,12 +20,12 @@ read.succ.docCount <- getURI(docCount.link)
 succ.docCount.dt <- read_csv(read.succ.docCount)
 ```
 
-```{r, echo=false}
+```{r}
 View(succ.docCount.dt)
 ```
 
 Assign Variables for Regression
-```{r, echo=false}
+```{r}
 Incidents <- c(succ.docCount.dt$`Heroin Incidents`) #X1
 Qty <- c(succ.docCount.dt$`Heroin Qty Seized (Kg)`) #X2
 Arrests <- c(succ.docCount.dt$`Heroin Arrests`) #Y
@@ -33,19 +33,19 @@ Arrests <- c(succ.docCount.dt$`Heroin Arrests`) #Y
 
 Multiple Linear Regression.
 Estimated Arrests= B0 + B1Qty + B2 Arrests + error
-```{r, echo=false}
+```{r}
  Regression <- lm( Arrests ~ Incidents + Qty)
 summary(Regression) # show results
 ```
 
 Other regression summaries 
-```{r, echo=false}
+```{r}
 anova(Regression) # anova table 
 vcov(Regression) # covariance matrix for model parameters 
 ```
 
 Quick regression plots for analysis of the model
-```{r, echo=false}
+```{r}
 autoplot((Regression), label.size = 3) 
 ```
 
