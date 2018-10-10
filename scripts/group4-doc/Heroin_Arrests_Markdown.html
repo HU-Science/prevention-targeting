@@ -139,7 +139,7 @@ succ.docCount.dt &lt;- read_csv(read.succ.docCount)</code></pre>
 <pre class="r"><code>Incidents &lt;- c(succ.docCount.dt$`Heroin Incidents`) #X1
 Qty &lt;- c(succ.docCount.dt$`Heroin Qty Seized (Kg)`) #X2
 Arrests &lt;- c(succ.docCount.dt$`Heroin Arrests`) #Y</code></pre>
-<p>Multiple Linear Regression. Estimated Arrests= B0 + B1Qty + B2 Arrests + error</p>
+<p>Multiple Linear Regression. Estimated Arrests= B0 + B1Qty + B2 Incidents + error</p>
 <pre class="r"><code> Regression &lt;- lm( Arrests ~ Incidents + Qty)
 summary(Regression) # show results</code></pre>
 <pre><code>## 
