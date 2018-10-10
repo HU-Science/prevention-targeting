@@ -1,0 +1,53 @@
+---
+title: "Heroin DOC Model"
+author: "Patrick Hollowell"
+date: "October 9, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(RCurl);library(readr); library(ggplot2); library(ggfortify)
+```
+
+## Heroin Arrests Model
+
+Loads up Heroin Analysis csv
+Includes quarterly data from each county from Q1 2013 through the end of Q4 2017.
+```{r}
+docCount.link <- "https://raw.githubusercontent.com/TeamDemacian/prevention-targeting/master/data/group4-doc/Heroin%20Incident%20Qty%20Arrest%20Analysis%20Data.csv"
+read.succ.docCount <- getURI(docCount.link)
+succ.docCount.dt <- read_csv(read.succ.docCount)
+```
+
+
+```{r echo=false}
+#Views dataset
+View(succ.docCount.dt)
+```
+
+Assign Variables for Regression
+```{r echo=false}
+Incidents <- c(succ.docCount.dt$`Heroin Incidents`) #X1
+Qty <- c(succ.docCount.dt$`Heroin Qty Seized (Kg)`) #X2
+Arrests <- c(succ.docCount.dt$`Heroin Arrests`) #Y
+```
+
+Multiple Linear Regression.
+Estimated Arrests= B0 + B1Qty + B2 Arrests + error
+```{r echo=false}
+ Regression <- lm( Arrests ~ Incidents + Qty)
+summary(Regression) # show results
+```
+
+Other regression summaries 
+```{r echo=false}
+anova(Regression) # anova table 
+vcov(Regression) # covariance matrix for model parameters 
+```
+
+Quick regression plots for analysis of the model
+```{r echo=false}
+autoplot((Regression), label.size = 3) 
+```
+
