@@ -1,44 +1,44 @@
-County Name,County FIPS code,County code,Latitude/Longitude,Date revised,Year,Number of successful reversals,Police Coverage
-Commonwealth of Pennsylvania Totals,42000,00,"(39.346129, -75.167756)",1/25/2018,2016,2039,No data on police coverage prior to 2017
-Commonwealth of Pennsylvania Totals,42000,00,"(39.346129, -75.167756)",1/25/2018,2017,3957,NA
-Commonwealth of Pennsylvania Totals,42000,00,"(39.346129, -75.167756)",6/18/2018,2018,1039,NA
-Commonwealth of Pennsylvania Totals,42000,00,"(39.346129, -75.167756)",1/25/2018,2014-2015,654,No data on police coverage prior to 2017
-Adams,42001,01,"(39.8720956503, -77.2222427076)",1/23/2018,2016,12,No data on police coverage prior to 2017
-Adams,42001,01,"(39.8720956503, -77.2222427076)",1/23/2018,2017,14,Partial coverage
-Adams,42001,01,"(39.8720956503, -77.2222427076)",6/12/2018,2018,5,Partial coverage
-Adams,42001,01,"(39.8720956503, -77.2222427076)",1/23/2018,2014-2015,0,No data on police coverage prior to 2017
-Allegheny,42003,02,"(40.4673554298, -79.9861984282)",1/23/2018,2016,176,No data on police coverage prior to 2017
-Allegheny,42003,02,"(40.4673554298, -79.9861984282)",1/23/2018,2017,481,Partial coverage
-Allegheny,42003,02,"(40.4673554298, -79.9861984282)",6/11/2018,2018,29,Partial coverage
-Allegheny,42003,02,"(40.4673554298, -79.9861984282)",1/23/2018,2014-2015,9,No data on police coverage prior to 2017
-Armstrong,42005,03,"(40.8150952555, -79.4731689893)",12/14/2017,2016,9,No data on police coverage prior to 2017
-Armstrong,42005,03,"(40.8150952555, -79.4731689893)",12/14/2017,2017,14,Partial coverage
-Armstrong,42005,03,"(40.8150952555, -79.4731689893)",6/12/2018,2018,1,Partial coverage
-Armstrong,42005,03,"(40.8150952555, -79.4731689893)",12/14/2017,2014-2015,0,No data on police coverage prior to 2017
-Beaver,42007,04,"(40.6834924548, -80.3510735648)",1/24/2018,2016,1,No data on police coverage prior to 2017
-Beaver,42007,04,"(40.6834924548, -80.3510735648)",1/24/2018,2017,62,Partial coverage
-Beaver,42007,04,"(40.6834924548, -80.3510735648)",6/12/2018,2018,7,Partial coverage
-Beaver,42007,04,"(40.6834924548, -80.3510735648)",1/24/2018,2014-2015,0,No data on police coverage prior to 2017
-Bedford,42009,05,"(40.0073753643, -78.4911647381)",2/8/2017,2016,0,No data on police coverage prior to 2017
-Bedford,42009,05,"(40.0073753643, -78.4911647381)",2/8/2017,2017,0,Full coverage
-Bedford,42009,05,"(40.0073753643, -78.4911647381)",2/8/2017,2018,0,Full coverage
-Bedford,42009,05,"(40.0073753643, -78.4911647381)",2/8/2017,2014-2015,0,No data on police coverage prior to 2017
-Berks,42011,06,"(40.4193963513, -75.9307732705)",1/23/2018,2016,24,No data on police coverage prior to 2017
-Berks,42011,06,"(40.4193963513, -75.9307732705)",1/23/2018,2017,70,Partial coverage
-Berks,42011,06,"(40.4193963513, -75.9307732705)",6/15/2018,2018,13,Partial coverage
-Berks,42011,06,"(40.4193963513, -75.9307732705)",1/23/2018,2014-2015,0,No data on police coverage prior to 2017
-Blair,42013,07,"(40.4855502384, -78.349076871)",12/7/2017,2016,7,No data on police coverage prior to 2017
-Blair,42013,07,"(40.4855502384, -78.349076871)",12/7/2017,2017,19,Partial coverage
-Blair,42013,07,"(40.4855502384, -78.349076871)",5/8/2018,2018,7,Partial coverage
-Blair,42013,07,"(40.4855502384, -78.349076871)",12/7/2017,2014-2015,0,No data on police coverage prior to 2017
-Bradford,42015,08,"(41.7911781401, -76.5182562384)",12/7/2017,2016,0,No data on police coverage prior to 2017
-Bradford,42015,08,"(41.7911781401, -76.5182562384)",12/7/2017,2017,0,No coverage
-Bradford,42015,08,"(41.7911781401, -76.5182562384)",6/12/2018,2018,0,Partial coverage
-Bradford,42015,08,"(41.7911781401, -76.5182562384)",12/7/2017,2014-2015,0,No data on police coverage prior to 2017
-Bucks,42017,09,"(40.335011331, -75.1129124111)",1/24/2018,2016,127,No data on police coverage prior to 2017
-Bucks,42017,09,"(40.335011331, -75.1129124111)",1/24/2018,2017,333,Full coverage
-Bucks,42017,09,"(40.335011331, -75.1129124111)",4/2/2018,2018,34,Full coverage
-Bucks,42017,09,"(40.335011331, -75.1129124111)",1/24/2018,2014-2015,64,No data on police coverage prior to 2017
+County,County FIPS code,County code,Latitude/Longitude,Date revised,Year,Frequency,Police Coverage
+Commonwealth of Pennsylvania Totals,42000,0,"(39.346129, -75.167756)",1/25/2018,2016,"2,039",No data on police coverage prior to 2017
+Commonwealth of Pennsylvania Totals,42000,0,"(39.346129, -75.167756)",1/25/2018,2017,"3,957",NA
+Commonwealth of Pennsylvania Totals,42000,0,"(39.346129, -75.167756)",6/18/2018,2018,"1,039",NA
+Commonwealth of Pennsylvania Totals,42000,0,"(39.346129, -75.167756)",1/25/2018,2014-2015,654,No data on police coverage prior to 2017
+Adams,42001,1,"(39.8720956503, -77.2222427076)",1/23/2018,2016,12,No data on police coverage prior to 2017
+Adams,42001,1,"(39.8720956503, -77.2222427076)",1/23/2018,2017,14,Partial coverage
+Adams,42001,1,"(39.8720956503, -77.2222427076)",6/12/2018,2018,5,Partial coverage
+Adams,42001,1,"(39.8720956503, -77.2222427076)",1/23/2018,2014-2015,0,No data on police coverage prior to 2017
+Allegheny,42003,2,"(40.4673554298, -79.9861984282)",1/23/2018,2016,176,No data on police coverage prior to 2017
+Allegheny,42003,2,"(40.4673554298, -79.9861984282)",1/23/2018,2017,481,Partial coverage
+Allegheny,42003,2,"(40.4673554298, -79.9861984282)",6/11/2018,2018,29,Partial coverage
+Allegheny,42003,2,"(40.4673554298, -79.9861984282)",1/23/2018,2014-2015,9,No data on police coverage prior to 2017
+Armstrong,42005,3,"(40.8150952555, -79.4731689893)",12/14/2017,2016,9,No data on police coverage prior to 2017
+Armstrong,42005,3,"(40.8150952555, -79.4731689893)",12/14/2017,2017,14,Partial coverage
+Armstrong,42005,3,"(40.8150952555, -79.4731689893)",6/12/2018,2018,1,Partial coverage
+Armstrong,42005,3,"(40.8150952555, -79.4731689893)",12/14/2017,2014-2015,0,No data on police coverage prior to 2017
+Beaver,42007,4,"(40.6834924548, -80.3510735648)",1/24/2018,2016,1,No data on police coverage prior to 2017
+Beaver,42007,4,"(40.6834924548, -80.3510735648)",1/24/2018,2017,62,Partial coverage
+Beaver,42007,4,"(40.6834924548, -80.3510735648)",6/12/2018,2018,7,Partial coverage
+Beaver,42007,4,"(40.6834924548, -80.3510735648)",1/24/2018,2014-2015,0,No data on police coverage prior to 2017
+Bedford,42009,5,"(40.0073753643, -78.4911647381)",2/8/2017,2016,0,No data on police coverage prior to 2017
+Bedford,42009,5,"(40.0073753643, -78.4911647381)",2/8/2017,2017,0,Full coverage
+Bedford,42009,5,"(40.0073753643, -78.4911647381)",2/8/2017,2018,0,Full coverage
+Bedford,42009,5,"(40.0073753643, -78.4911647381)",2/8/2017,2014-2015,0,No data on police coverage prior to 2017
+Berks,42011,6,"(40.4193963513, -75.9307732705)",1/23/2018,2016,24,No data on police coverage prior to 2017
+Berks,42011,6,"(40.4193963513, -75.9307732705)",1/23/2018,2017,70,Partial coverage
+Berks,42011,6,"(40.4193963513, -75.9307732705)",6/15/2018,2018,13,Partial coverage
+Berks,42011,6,"(40.4193963513, -75.9307732705)",1/23/2018,2014-2015,0,No data on police coverage prior to 2017
+Blair,42013,7,"(40.4855502384, -78.349076871)",12/7/2017,2016,7,No data on police coverage prior to 2017
+Blair,42013,7,"(40.4855502384, -78.349076871)",12/7/2017,2017,19,Partial coverage
+Blair,42013,7,"(40.4855502384, -78.349076871)",5/8/2018,2018,7,Partial coverage
+Blair,42013,7,"(40.4855502384, -78.349076871)",12/7/2017,2014-2015,0,No data on police coverage prior to 2017
+Bradford,42015,8,"(41.7911781401, -76.5182562384)",12/7/2017,2016,0,No data on police coverage prior to 2017
+Bradford,42015,8,"(41.7911781401, -76.5182562384)",12/7/2017,2017,0,No coverage
+Bradford,42015,8,"(41.7911781401, -76.5182562384)",6/12/2018,2018,0,Partial coverage
+Bradford,42015,8,"(41.7911781401, -76.5182562384)",12/7/2017,2014-2015,0,No data on police coverage prior to 2017
+Bucks,42017,9,"(40.335011331, -75.1129124111)",1/24/2018,2016,127,No data on police coverage prior to 2017
+Bucks,42017,9,"(40.335011331, -75.1129124111)",1/24/2018,2017,333,Full coverage
+Bucks,42017,9,"(40.335011331, -75.1129124111)",4/2/2018,2018,34,Full coverage
+Bucks,42017,9,"(40.335011331, -75.1129124111)",1/24/2018,2014-2015,64,No data on police coverage prior to 2017
 Butler,42019,10,"(40.9108318483, -79.9171177889)",1/24/2018,2016,25,No data on police coverage prior to 2017
 Butler,42019,10,"(40.9108318483, -79.9171177889)",1/24/2018,2017,35,Full coverage
 Butler,42019,10,"(40.9108318483, -79.9171177889)",4/24/2018,2018,3,Full coverage
