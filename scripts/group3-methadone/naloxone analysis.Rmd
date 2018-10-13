@@ -1,0 +1,61 @@
+---
+title: "Naloxone_Reversals_by_County"
+author: "Billie Anderson"
+date: "October 11, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+# load library
+library(RCurl)
+library(readr)
+library(pscl)
+library(MASS)
+
+#I went back to the raw data and renamed the varible 'successful number of naloxone reversals' 'Frequency' so it would be easier to code
+
+#assign raw files link to variables
+
+naloxone_rev.link<-"https://raw.githubusercontent.com/TeamDemacian/prevention-targeting/master/data/Successful_Naloxone_Reversals_by_Law_Enforcement_Years_2014_-_June_2018_County_Drug_and_Alcohol_Program.csv"
+
+#get url data
+naloxone_rev.csv <- getURL(naloxone_rev.link)
+
+#read csv data
+naloxone_rev <- read_csv(naloxone_rev.csv)
+
+
+#counting up the number of successful naloxone reversals for each year by county
+#Frequecny variable is the naloxone reversals
+
+#the x variable that gets created are the counts by County
+naloxone_rev_summary<-aggregate(naloxone_rev$Frequency,by=list(Year=naloxone_rev$Year,County=naloxone_rev$County), FUN=sum)
+
+#removing counties with missing values and are not useful
+naloxone_rev_summary<-subset(naloxone_rev_summary, County != "Commonwealth of Pennsylvania Totals") 
+naloxone_rev_summary<-subset(naloxone_rev_summary, County != "Capitol Police")
+naloxone_rev_summary<-subset(naloxone_rev_summary, County != "Forest")
+naloxone_rev_summary<-subset(naloxone_rev_summary, County != "Fulton")
+naloxone_rev_summary<-subset(naloxone_rev_summary, County != "Juniata")
+naloxone_rev_summary<-subset(naloxone_rev_summary, County != "Sullivan")
+naloxone_rev_summary<-subset(naloxone_rev_summary, County != "State Police")
+
+#subsetting the 2017 year
+naloxone_rev_summary_2017<-subset(naloxone_rev_summary, Year=="2017")
+
+View(naloxone_rev_summary_2017)
+
+#running the negative binomial model
+#the x variable is the counts so it is the response ("Y"), need to rename x so that it is more meaningful
+summary(m1 <- glm.nb(x ~ County, data=naloxone_rev_summary_2017))
+                       
+                             
+
+```
+
