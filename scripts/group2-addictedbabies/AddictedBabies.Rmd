@@ -20,7 +20,13 @@ path.addictedbabies <- paste0(path.data,'group2-addictedbabies/')
 name.babies.born.ma <- 'Babies_born_on_Medical_Assistance__MA__with_Neonatal_Abstinence_Syndrome__NAS__CY_2015-_2016_County_Human_Services.csv'
 path.babies.born.ma <- paste0(path.addictedbabies,name.babies.born.ma)
 df.babies.born.ma <- read_csv(path.babies.born.ma)
-head(df.babies.born.ma)
+
+name.pa.population <- 'PEP_2017_PEPANNRES_with_ann.csv'
+path.name.pa.population <- paste0(path.addictedbabies,name.pa.population)
+df.pa.population <- read_csv(path.name.pa.population, skip = 1)
+colnames(df.pa.population) <- c('id1','id2','Geography','2010.Census','2010.Base','2010.Estimate',
+                               '2011.Estimate','2012.Estimate','2013.Estimate','2014.Estimate',
+                               '2015.Estimate','2016.Estimate','2017.Estimate')
 ```
 
 ```{r data_attributes}
@@ -41,4 +47,115 @@ df.pa.babies <- subset(df.babies.born.ma,
 Year <- df.pa.babies$Year
 `Count of Individuals` <- df.pa.babies$`Count of Individuals`
 qplot(Year, `Count of Individuals`,geom=c("point", "line"))
+df.pa.babies
+```
+
+```{r county_state}
+df.babies.born.ma.county <- subset(df.babies.born.ma,df.babies.born.ma$`FIPS County Code`!=42000)
+df.babies.born.ma.state <- subset(df.babies.born.ma,df.babies.born.ma$`FIPS County Code`==42000)
+```
+
+```{r check_nbr_assumption}
+# negative binomial regression
+var(df.babies.born.ma.county$`Count of Individuals`)
+mean(df.babies.born.ma.county$`Count of Individuals`)
+```
+
+```{r}
+df.babies.born.ma.county <- subset(df.babies.born.ma.county,df.babies.born.ma.county$`Count of Individuals`>=0)
+plt.df <- df.babies.born.ma.county[order(df.babies.born.ma.county$`Count of Individuals`,decreasing=F),]
+barplot(plt.df$`Count of Individuals`, 
+        ylab = "Addicted Babies by County",
+        xlab = "Frequency",
+        col = "lightblue",
+        cex.axis = 1.5,
+        horiz=TRUE)
+```
+
+```{r}
+ggplot(data=plt.df, aes(y=`Count of Individuals`, 
+                        x=reorder(factor(`County Name`),`Count of Individuals`))) +
+  geom_bar(stat="identity", fill="steelblue") +
+  scale_fill_brewer(palette = "Set1") +
+  coord_flip() +
+  facet_grid(plt.df$Year) +
+  xlab("Addicted Babies by County") +
+  ylab("Frequency") +
+  theme(text = element_text(size=7))
+```
+
+```{r}
+county.name <- data.frame(t(data.frame(strsplit(df.pa.population$Geography," County, "))))
+rownames(county.name) <- c()
+colnames(county.name) <- c('County','State')
+county.name$County <- capitalize(tolower(county.name$County))
+
+df.pa.population.2016 <- data.frame(County = county.name$County,
+                                        Year = 2016,
+                                        Population = df.pa.population$`2016.Estimate`)
+df.pa.population.2015 <- data.frame(County = county.name$County,
+                                        Year = 2015,
+                                        Population = df.pa.population$`2015.Estimate`)
+rownames(df.pa.population.2016) <- c()
+rownames(df.pa.population.2015) <- c()
+
+df.pa.population.20152016 <- rbind(df.pa.population.2016,df.pa.population.2015)
+```
+
+```{r}
+name.heroin.incident.arrest.qty <- 'Heroin Incident Qty Arrest Analysis Data.csv'
+path.heroin.incident.arrest.qty <- paste0(path.addictedbabies,name.heroin.incident.arrest.qty)
+df.heroin.incident.arrest.qty <- read_csv(path.heroin.incident.arrest.qty, skip = 0)
+
+qtr.yr <- data.frame(t(data.frame(strsplit(df.heroin.incident.arrest.qty$`Qtr/Yr`," "))))
+rownames(qtr.yr) <- c()
+colnames(qtr.yr) <- c("Year","Quarter")
+df.heroin.incident.arrest.qty$Year <- qtr.yr$Year
+df.heroin.incident.arrest.qty$Quarter <- qtr.yr$Quarter
+df.heroin.incident.arrest.qty.20152016 <- subset(df.heroin.incident.arrest.qty,df.heroin.incident.arrest.qty$Year==2015 | df.heroin.incident.arrest.qty$Year==2016)
+
+df.heroin.incident.arrest.year <- aggregate(list(df.heroin.incident.arrest.qty$`Heroin Incidents`,
+                                                 df.heroin.incident.arrest.qty$`Heroin Qty Seized (Kg)`,
+                                                 df.heroin.incident.arrest.qty$`Heroin Arrests`), by=list(df.heroin.incident.arrest.qty$Year,df.heroin.incident.arrest.qty$County), FUN=sum)
+colnames(df.heroin.incident.arrest.year) <- c('Year','County','Heroin Incidents','Heroin Kg','Heroin Arrests')
+df.heroin.incident.arrest.year
+```
+
+```{r}
+library(Hmisc)
+df.addicted.babies <- data.frame(County = capitalize(tolower(df.babies.born.ma.county$`County Name`)),
+                                 Location = df.babies.born.ma.county$`Latitude/Longitude`,
+                                 Year = df.babies.born.ma.county$Year,
+                                 Count = df.babies.born.ma.county$`Count of Individuals`
+                                 )
+df.heroin.incident.arrest.year.20152016 <- subset(df.heroin.incident.arrest.year,df.heroin.incident.arrest.year$Year == 2015 | df.heroin.incident.arrest.year$Year == 2016)
+
+df.addicted.babies <- merge(df.addicted.babies,df.pa.population.20152016, by=c("County","Year"), all.x = TRUE)
+
+df.addicted.babies <- merge(df.addicted.babies, df.heroin.incident.arrest.year.20152016, by=c("County","Year"), all.x = TRUE)
+```
+
+```{r}
+library(dplyr)
+df.addicted.babies$Population
+```
+
+```{r}
+df.addicted.babies <- data.frame(
+df.addicted.babies %>% mutate('County Size' = case_when(.$Population>=1000000 ~ "Big Sized",
+                                             .$Population %in% 300000:1000000~ "Medium Sized",
+                                             .$Population %in% 100000:300000~"Small Sized",
+                                             TRUE ~ "Others")))
+df.addicted.babies$Year <- factor(df.addicted.babies$Year)
+df.addicted.babies$County.Size <- factor(df.addicted.babies$County.Size)
+df.addicted.babies
+```
+
+```{r}
+require(foreign)
+require(ggplot2)
+require(MASS)
+summary(model1 <- glm.nb(Count ~ County + Year + Population + Heroin.Incidents + Heroin.Kg 
+                         + Heroin.Arrests + County.Size
+                         , data = df.addicted.babies))
 ```

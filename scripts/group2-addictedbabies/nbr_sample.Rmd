@@ -1,0 +1,59 @@
+---
+title: "NegativeBionomialRegression"
+author: "Z. Huang"
+date: "October 11, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# reference: http://data.princeton.edu/wws509/r/overdispersion.html
+library(foreign)
+ab <- read.dta("http://www.stata-press.com/data/lf2/couart2.dta")
+names(ab)
+r <- c(mean(ab$art), var(ab$art))
+cvr <- c(mean=r[1], var=r[2], ratio=r[2]/r[1])
+print(cvr)
+```
+
+```{r poisson_model}
+mp <- glm(art~fem+mar+kid5+phd+ment, family=poisson, data=ab)
+summary(mp)
+
+qchisq(0.95, df.residual(mp))
+
+deviance(mp)
+
+pr <- residuals(mp,"pearson")
+sum(pr^2)
+```
+
+```{r load_packages}
+require(foreign)
+require(ggplot2)
+require(MASS)
+```
+
+```{r load_data}
+dat <- read.dta("https://stats.idre.ucla.edu/stat/stata/dae/nb_data.dta")
+dat <- within(dat, {
+    prog <- factor(prog, levels = 1:3, labels = c("General", "Academic", "Vocational"))
+    id <- factor(id)
+})
+
+summary(dat)
+```
+
+```{r}
+ggplot(dat, aes(daysabs, fill = prog)) + geom_histogram(binwidth = 1) + facet_grid(prog ~ 
+    ., margins = TRUE, scales = "free")
+```
+
+```{r}
+with(dat, tapply(daysabs, prog, function(x) {
+    sprintf("M (SD) = %1.2f (%1.2f)", mean(x), sd(x))
+}))
+```
+
+```{r}
+summary(m1 <- glm.nb(daysabs ~ math + prog, data = dat))
+```
