@@ -57,3 +57,20 @@ with(dat, tapply(daysabs, prog, function(x) {
 ```{r}
 summary(m1 <- glm.nb(daysabs ~ math + prog, data = dat))
 ```
+
+```{r}
+m2 <- update(m1, . ~ . - prog)
+anova(m1, m2)
+```
+
+```{r}
+m3 <- glm(daysabs ~ math + prog, family = "poisson", data = dat)
+pchisq(2 * (logLik(m1) - logLik(m3)), df = 1, lower.tail = FALSE)
+```
+
+```{r}
+library(vcd)
+data("HorseKicks")
+HorseKicks
+
+```

@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(rstudioapi)
 library(readr)
 library(ggplot2)
+library(Hmisc)
 ```
 
 
@@ -22,11 +23,64 @@ path.babies.born.ma <- paste0(path.addictedbabies,name.babies.born.ma)
 df.babies.born.ma <- read_csv(path.babies.born.ma)
 
 name.pa.population <- 'PEP_2017_PEPANNRES_with_ann.csv'
-path.name.pa.population <- paste0(path.addictedbabies,name.pa.population)
-df.pa.population <- read_csv(path.name.pa.population, skip = 1)
+path.pa.population <- paste0(path.addictedbabies,name.pa.population)
+df.pa.population <- read_csv(path.pa.population, skip = 1)
 colnames(df.pa.population) <- c('id1','id2','Geography','2010.Census','2010.Base','2010.Estimate',
                                '2011.Estimate','2012.Estimate','2013.Estimate','2014.Estimate',
                                '2015.Estimate','2016.Estimate','2017.Estimate')
+
+name.pa.econ.char.15 <- 'ACS_15_5YR_DP03_with_ann.csv'
+path.pa.econ.char.15 <- paste0(path.addictedbabies,name.pa.econ.char.15)
+df.pa.econ.char.15 <- read_csv(path.pa.econ.char.15, skip = 1)
+
+df.pa.econ.char.15.num <- dplyr::select_if(df.pa.econ.char.15, is.numeric)
+df.pa.econ.char.15 <- data.frame(Geography = df.pa.econ.char.15[,3],
+                                 df.pa.econ.char.15.num)
+
+name.pa.econ.char.16 <- 'ACS_16_5YR_DP03_with_ann.csv'
+path.pa.econ.char.16 <- paste0(path.addictedbabies,name.pa.econ.char.16)
+df.pa.econ.char.16 <- read_csv(path.pa.econ.char.16, skip = 1)
+
+df.pa.econ.char.16.num <- dplyr::select_if(df.pa.econ.char.16, is.numeric)
+df.pa.econ.char.16 <- data.frame(Geography = df.pa.econ.char.16[,3],
+                                 df.pa.econ.char.16.num)
+
+county.name.16 <- data.frame(t(data.frame(strsplit(df.pa.econ.char.16$Geography," County, "))))
+rownames(county.name.16) <- c()
+colnames(county.name.16) <- c('County','State')
+county.name.16$County <- capitalize(tolower(county.name.16$County))
+
+county.name.15 <- data.frame(t(data.frame(strsplit(df.pa.econ.char.15$Geography," County, "))))
+rownames(county.name.15) <- c()
+colnames(county.name.15) <- c('County','State')
+county.name.15$County <- capitalize(tolower(county.name.15$County))
+
+clean.16.dt <- df.pa.econ.char.16[grepl("Percent", names(df.pa.econ.char.16))]
+clean.16.dt <- clean.16.dt[!grepl("Margin", names(clean.16.dt))]
+
+df.pa.econ.char.16 <- data.frame(County = county.name.16$County,
+                                 Year = 2016,
+                                 clean.16.dt)
+
+clean.15.dt <- df.pa.econ.char.16[grepl("Percent", names(df.pa.econ.char.16))]
+clean.15.dt <- clean.15.dt[!grepl("Margin", names(clean.15.dt))]
+
+# write.csv(data.frame(colnames(df.pa.econ.char.16)), file = "char_16_colnames.csv",row.names=FALSE)
+# write.csv(data.frame(colnames(df.pa.econ.char.15)), file = "char_15_colnames.csv",row.names=FALSE)
+
+df.pa.econ.char.15 <- data.frame(County = county.name.15$County,
+                                 Year = 2015,
+                                 clean.15.dt)
+
+df.pa.econ.char.16 <- subset(df.pa.econ.char.16,df.pa.econ.char.16$County!='United states')
+  
+rownames(df.pa.econ.char.16) <- c()
+
+df.pa.econ.char.15 <- subset(df.pa.econ.char.15,df.pa.econ.char.15$County!='United states')
+
+rownames(df.pa.econ.char.15) <- c()
+
+df.pa.econ.char.20152016 <- rbind(df.pa.econ.char.15,df.pa.econ.char.16)
 ```
 
 ```{r data_attributes}
@@ -145,17 +199,335 @@ df.addicted.babies <- data.frame(
 df.addicted.babies %>% mutate('County Size' = case_when(.$Population>=1000000 ~ "Big Sized",
                                              .$Population %in% 300000:1000000~ "Medium Sized",
                                              .$Population %in% 100000:300000~"Small Sized",
-                                             TRUE ~ "Others")))
+                                             TRUE ~ "Others"))
+)
 df.addicted.babies$Year <- factor(df.addicted.babies$Year)
 df.addicted.babies$County.Size <- factor(df.addicted.babies$County.Size)
-df.addicted.babies
+# df.addicted.babies$CountRatio <- df.addicted.babies$Count/df.addicted.babies$Population
+df.addicted.babies <- data.frame(
+df.addicted.babies %>% mutate('Rural County' = factor(case_when(.$County=="Erie" ~ "No",
+                                                         .$County=="Beaver" ~ "No",
+                                                         .$County=="Allegheny" ~ "No",
+                                                         .$County=="Westmoreland" ~ "No",
+                                                         .$County=="Cumberland" ~ "No",
+                                                         .$County=="Dauphin" ~ "No",
+                                                         .$County=="Lebanon" ~ "No",
+                                                         .$County=="York" ~ "No",
+                                                         .$County=="Lancaster" ~ "No",
+                                                         .$County=="Berks" ~ "No",
+                                                         .$County=="Chester" ~ "No",
+                                                         .$County=="Delaware" ~ "No",
+                                                         .$County=="Montgomery" ~ "No",
+                                                         .$County=="Philadelphia" ~ "No",
+                                                         .$County=="Lehigh" ~ "No",
+                                                         .$County=="Bucks" ~ "No",
+                                                         .$County=="Northampton" ~ "No",
+                                                         .$County=="Luzerne" ~ "No",
+                                                         .$County=="Lackawanna" ~ "No",
+                                                         TRUE ~ "Yes")))
+)
+
 ```
 
 ```{r}
 require(foreign)
 require(ggplot2)
 require(MASS)
-summary(model1 <- glm.nb(Count ~ County + Year + Population + Heroin.Incidents + Heroin.Kg 
+summary(model1 <- glm.nb(Count~ County + Year + Heroin.Incidents + Heroin.Kg 
                          + Heroin.Arrests + County.Size
                          , data = df.addicted.babies))
+```
+
+```{r}
+df.addicted.babies <- merge(df.addicted.babies, df.pa.econ.char.20152016, by=c("County","Year"), all.x = TRUE)
+df.addicted.babies$CountPopRatio <- df.addicted.babies$Count/df.addicted.babies$Population
+# df.addicted.babies$CountPopRatioStandardized <- (df.addicted.babies$CountPopRatio-mean(df.addicted.babies$CountPopRatio))/sd(df.addicted.babies$CountPopRatio)
+```
+
+```{r}
+library(dplyr);library(seplyr)
+df.addicted.babies.scale <- df.addicted.babies %>% mutate_if(is.numeric, scale)
+
+df.addicted.babies.predictor <- df.addicted.babies.scale %.>% deselect(., c("CountPopRatio", "County","Year","Location"))
+df.addicted.babies.response <- df.addicted.babies.scale$CountPopRatio
+df.addicted.babies.geography <- df.addicted.babies.scale[,1:3]
+df.addicted.babies.data <- data.frame(df.addicted.babies.response,
+                                      (df.addicted.babies.predictor %.>% deselect(., c("County.Size", "Rural.County"))))
+#df.addicted.babies.data <- sapply( df.addicted.babies.data, as.numeric )
+
+# write.csv(df.addicted.babies.data,'addicted_babies_raw.csv')
+
+colnames(df.addicted.babies.data) <- c("Count.Pop.Ratio","Count",
+"Population",
+"Heroin.Incidents",
+"Heroin.Kg",
+"Heroin.Arrests",
+"Pop.16.Over",
+"Pop.16.Over.Labor",
+"Pop.16.Over.Civilian.Labor",
+"Pop.16.Over.Civilian.Labor.Employed",
+"Pop.16.Over.Civilian.Labor.Unemployed",
+"Pop.16.Over.Armed.Labor",
+"Pop.16.Over.Not.Labor",
+"Civilian.Labor",
+"Civilian.Labor.Unemployed",
+"Pop.16.Over.Female",
+"Pop.16.Over.Female.Labor",
+"Pop.16.Over.Female.Civilian.Labor",
+"Pop.16.Over.Female.Civilian.Labor.Employed",
+"With.Children.Under.6.Years.Old",
+"With.Children.Under.6.Years.Old.All.Parent.Labor",
+"With.Children.Under.6.17.Years.Old",
+"With.Children.Under.6..17.Years.Old.All.Parent.Labor",
+"Communiting.To.Work",
+"Communiting.To.Work.Drove.Alone",
+"Communiting.To.Work.Carpooled",
+"Communiting.To.Work.Public.Transp.Excluding.Taxicab",
+"Communiting.To.Work..Walked",
+"Communiting.To.Work..Other.Means",
+"Communiting.To.Work..Worked.At.Home",
+"Occupation.Civilian.Employed",
+"Occupation.Civilian.Employed.MBSA",
+"Occupation.Civilian.Employed.Service",
+"Occupation.Civilian.Employed.Sales.Office",
+"Occupation.Civilian.Employed.NRCM",
+"Occupation.Civilian.Employed.PTMM",
+"Industry.Civilian.Employed",
+"Industry.Civilian.Employed.AFFHM",
+"Industry.Civilian.Employed.Construction",
+"Industry.Civilian.Employed.Manufacturing",
+"Industry.Civilian.Employed.Wholesale.Trade",
+"Industry.Civilian.Employed.Retail.Trade",
+"Industry.Civilian.Employed.TWU",
+"Industry.Civilian.Employed.Information",
+"Industry.Civilian.Employed.FIRERL",
+"Industry.Civilian.Employed.PSMAWMS",
+"Industry.Civilian.Employed.ESHCSA",
+"Industry.Civilian.Employed.AERAFS",
+"Industry.Civilian.Employed.OSEPA",
+"Industry.Civilian.Employed.PA",
+"Class.Of.Worker.Civilian.Employed",
+"Class.Of.Worker.Civilian.Employed.PWSW",
+"Class.Of.Worker.Civilian.Employed.GW",
+"Class.Of.Worker.Civilian.Self.Employed.Own",
+"Class.Of.Worker.Civilian.Unpaid.Family.Workers",
+"Income.And.Benefits.In.Total.Households",
+"Income.And.Benefits.In.Total.Households.Less.Than.10.000",
+"Income.And.Benefits.In.Total.Households.10.000.To.14.999",
+"Income.And.Benefits.In.Total.Households.15.000.To.24.999",
+"Income.And.Benefits.In.Total.Households.25.000.To.34.999",
+"Income.And.Benefits.In.Total.Households.35.000.To.49.999",
+"Income.And.Benefits.In.Total.Households.50.000.To.74.999",
+"Income.And.Benefits.In.Total.Households.75.000.To.99.999",
+"Income.And.Benefits.In.Total.Households.100.000.To.149.999",
+"Income.And.Benefits.In.Total.Households.150.000.To.199.999",
+"Income.And.Benefits.In.Total.Households.200.000.Or.More",
+"Income.And.Benefits.In.With.Earnings",
+"Income.And.Benefits.In.With.Social.Security",
+"Income.And.Benefits.In.With.Retirement.Income",
+"Income.And.Benefits.In.With.Supplemental.Security.Income",
+"Income.And.Benefits.In.With.Cash.Public.Assistance.Income",
+"Income.And.Benefits.In.With.Food.Stamp.Snap.Benefits.In.The.Past.12.Months",
+"Income.And.Benefits.In.Families",
+"Income.And.Benefits.In.Families.Less.Than.10.000",
+"Income.And.Benefits.In.Families.10.000.To.14.999",
+"Income.And.Benefits.In.Families.15.000.To.24.999",
+"Income.And.Benefits.In.Families.25.000.To.34.999",
+"Income.And.Benefits.In.Families.35.000.To.49.999",
+"Income.And.Benefits.In.Families.50.000.To.74.999",
+"Income.And.Benefits.In.Families.75.000.To.99.999",
+"Income.And.Benefits.In.Families.100.000.To.149.999",
+"Income.And.Benefits.In.Families.150.000.To.199.999",
+"Income.And.Benefits.In.Families.200.000.Or.More",
+"Income.And.Benefits.In.Nonfamily.Households",
+"HIC.Civilian.Noninstitutionalized.Population",
+"HIC.Civilian.Noninstitutionalized.Population.With.HIC",
+"HIC.Civilian.Noninstitutionalized.Population.With.PHI",
+"HIC.Civilian.Noninstitutionalized.Population.With.PC",
+"HIC.Civilian.Civilian.Noninstitutionalized.Population.No.HIC",
+"HIC.Civilian.Noninstitutionalized.Population.18",
+"HIC.Civilian.Noninstitutionalized.Population.18.No.HIC",
+"HIC.Civilian.Noninstitutionalized.Population.18.64",
+"HIC.Civilian.Noninstitutionalized.Population.18.64.Labor",
+"HIC.Civilian.Noninstitutionalized.Population.18.64.Labor.Employed",
+"HIC.Civilian.Noninstitutionalized.Population.18.64.Labor.Employed.With.HIC",
+"HIC.Civilian.Noninstitutionalized.Population.18.64.Labor.Employed.With.HIC.With.PHI",
+"HIC.Civilian.Noninstitutionalized.Population.18.64.Labor.Employed.With.HIC.With.PC",
+"HIC.Civilian.Noninstitutionalized.Population.18.64.Labor.Employed..NoHIC",
+"HIC.Civilian.Noninstitutionalized.Population.18.64.Labor.Unemployed",
+"HIC.Civilian.Noninstitutionalized.Population.18.64.Labor.Unemployed.With.HIC",
+"HIC.Civilian.Noninstitutionalized.Population.18.64.Labor.Unemployed.With.HIC.With.PHI",
+"HIC.Civilian.Noninstitutionalized.Population.18.64.Labor.Unemployed.With.HIC.With.PC",
+"HIC.Civilian.Noninstitutionalized.Population.18.64.Labor.Unemployed.No.HIC",
+"HIC.Civilian.Noninstitutionalized.Population.18.64.Labor.Not.Labor",
+"HIC.Civilian.Noninstitutionalized.Population.18.64.Labor.Not.Labor.With.HIC",
+"HIC.Civilian.Noninstitutionalized.Population.18.64.Labor.Not.Labor.With.HIC.With.PHI",
+"HIC.Civilian.Noninstitutionalized.Population.18.64.Labor.Not.Labor.With.HIC.With.PC",
+"HIC.Civilian.Noninstitutionalized.Population.18.64.Labor.Not.Labor.No.HIC",
+"Families.Below.Poverty.Level.All.Families",
+"Families.Below.Poverty.Level.All.Families.With.Children.Under.18",
+"Families.Below.Poverty.Level.All.Families.With.Children.Under.5",
+"Families.Below.Poverty.Level.Married.Couple.Families",
+"Families.Below.Poverty.Level.Married.Couple.Families.With.Children.Under.18",
+"Families.Below.Poverty.Level.Married.Couple.Families.With.Children.Under.5",
+"Families.Below.Poverty.Level.With.Female.H.No.Husband",
+"Families.Below.Poverty.Level.With.Female.H.No.Husband.With.Children.Under.18",
+"Families.Below.Poverty.Level.With.Female.H.No.Husband.With.Children.Under.5",
+"Families.Below.Poverty.Level.All.People",
+"Families.Below.Poverty.Level.All.People.Under.18",
+"Families.Below.Poverty.Level.All.People.Under.With.Related.Children.18",
+"Families.Below.Poverty.Level.All.People.Under.With.Related.Children.5",
+"Families.Below.Poverty.Level.All.People.Under.With.Related.Children.5.17",
+"Families.Below.Poverty.Level.All.People.18.Over",
+"Families.Below.Poverty.Level.All.People.18.64",
+"Families.Below.Poverty.Level.All.People.64.Over",
+"Families.Below.Poverty.Level.People.In.Families",
+"Families.Below.Poverty.Level.Unrelated.Individuals.15.Over"
+)
+```
+
+```{r PCA}
+df.addicted.babies.data <- df.addicted.babies.data %.>% deselect(., c("Count.Pop.Ratio", "Count"))
+
+df.addicted.babies.data$Heroin.Incidents[is.na(df.addicted.babies.data$Heroin.Incidents)] <- mean(df.addicted.babies.data$Heroin.Incidents, na.rm = TRUE) 
+df.addicted.babies.data$Heroin.Kg[is.na(df.addicted.babies.data$Heroin.Kg)] <- mean(df.addicted.babies.data$Heroin.Kg, na.rm = TRUE) 
+df.addicted.babies.data$Heroin.Arrests[is.na(df.addicted.babies.data$Heroin.Arrests)] <- mean(df.addicted.babies.data$Heroin.Arrests, na.rm = TRUE) 
+addicted.babies.pca <- prcomp(df.addicted.babies.data, center = TRUE, scale. = TRUE)
+```
+
+```{r pca_sum}
+summary(addicted.babies.pca)
+```
+
+```{r}
+suppressMessages(library(RSQLite))
+suppressMessages(library(stats))
+suppressMessages(library(psych))
+suppressMessages(library(rela))
+suppressMessages(library(MASS))
+suppressMessages(library(parallel))
+pca.cor <- cor(df.addicted.babies.data)
+pca.cov <- cov(df.addicted.babies.data)
+pca.cov.cvt <- cov2cor(pca.cov)
+n <- nrow(df.addicted.babies.data)
+out <- corr.p(cor(df.addicted.babies.data),n,alpha=0.05)
+```
+
+```{r}
+pca.model.1 <- principal(pca.cor, rotate = "none")
+pca.model.1
+```
+
+```{r}
+n.factors <- length(colnames(df.addicted.babies.data))
+pca.model.2 <- principal(pca.cor, nfactors = n.factors, rotate = "none")
+pca.model.2
+
+```
+
+```{r}
+n.factors <- 10
+pca.model.3 <- principal(pca.cor, nfactors = n.factors, rotate = "none")
+pca.model.3
+```
+
+```{r}
+a <- alpha(pca.cor, check.keys=TRUE)
+a
+```
+
+```{r}
+fa.parallel(df.addicted.babies.data, n.obs = n, fm = "pa", fa = "pc")
+```
+
+```{r}
+n.factors <- 5
+pca.model.5 <- principal(pca.cor, nfactors = n.factors, rotate = "none")
+pca.model.5
+```
+
+```{r}
+fa.diagram(pca.model.5)
+```
+
+```{r}
+plot(pca.model.5$)
+```
+
+```{r}
+# attributes(pca.model.5)
+load <- with(pca.model.5, unclass(loadings))
+pca.results <- data.frame(load)
+```
+
+```{r}
+library(ggrepel)
+df.addicted.babies.2015 <- subset(df.addicted.babies.scale,df.addicted.babies.scale$Year==2015)
+ggplot(df.addicted.babies.2015, aes(x=Population, y=CountPopRatio)) +
+    geom_point(shape = 5,color = "blue", size = 2) +
+    scale_colour_hue(l=50) + 
+    geom_smooth(method=lm) +
+    geom_label_repel(aes(label = County),
+                  box.padding   = 0.35, 
+                  point.padding = 0.5,
+                  segment.color = 'grey50') +
+  theme_classic()
+```
+
+```{r}
+df.addicted.babies.2015 <- subset(df.addicted.babies.scale,df.addicted.babies.scale$Year==2015)
+ggplot(df.addicted.babies.2015, aes(x=Population, y=Count)) +
+    geom_point(shape = 5,color = "blue", size = 2) +
+    scale_colour_hue(l=50) + 
+    geom_smooth(method=lm) +
+    geom_label_repel(aes(label = County),
+                  box.padding   = 0.35, 
+                  point.padding = 0.5,
+                  segment.color = 'grey50') +
+  theme_classic()
+
+```
+
+```{r}
+df.addicted.babies.2015 <- subset(df.addicted.babies.scale,df.addicted.babies.scale$Year==2015)
+ggplot(df.addicted.babies.2015, aes(x=Heroin.Arrests, y=CountPopRatio)) +
+    geom_point(shape = 5,color = "blue", size = 2) +
+    scale_colour_hue(l=50) + 
+    geom_smooth(method=lm) +
+    geom_label_repel(aes(label = County),
+                  box.padding   = 0.35, 
+                  point.padding = 0.5,
+                  segment.color = 'grey50') +
+  theme_classic()
+
+```
+
+```{r}
+df.addicted.babies.2015 <- subset(df.addicted.babies.scale,df.addicted.babies.scale$Year==2015)
+ggplot(df.addicted.babies.2015, aes(x=Percent..EMPLOYMENT.STATUS...Population.16.years.and.over...Not.in.labor.force, y=CountPopRatio)) +
+    geom_point(shape = 5,color = "blue", size = 2) +
+    scale_colour_hue(l=50) + 
+    geom_smooth(method=lm) +
+    geom_label_repel(aes(label = County),
+                  box.padding   = 0.35, 
+                  point.padding = 0.5,
+                  segment.color = 'grey50') +
+  theme_classic() +
+  xlab("Population with 16 years older and over not in labor force")
+
+```
+
+```{r}
+df.addicted.babies.2015 <- subset(df.addicted.babies.scale,df.addicted.babies.scale$Year==2015)
+ggplot(df.addicted.babies.2015, aes(x=Percent..PERCENTAGE.OF.FAMILIES.AND.PEOPLE.WHOSE.INCOME.IN.THE.PAST.12.MONTHS.IS.BELOW.THE.POVERTY.LEVEL...All.people, y=CountPopRatio)) +
+    geom_point(shape = 5,color = "blue", size = 2) +
+    scale_colour_hue(l=50) + 
+    geom_smooth(method=lm) +
+    geom_label_repel(aes(label = County),
+                  box.padding   = 0.35, 
+                  point.padding = 0.5,
+                  segment.color = 'grey50') +
+  theme_classic() +
+  xlab("Income below poverty level")
+
 ```
