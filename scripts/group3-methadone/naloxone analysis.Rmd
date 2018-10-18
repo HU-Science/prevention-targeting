@@ -59,3 +59,38 @@ summary(m1 <- glm.nb(x ~ County, data=naloxone_rev_summary_2017))
 
 ```
 
+```{r}
+# load library
+library(RCurl)
+library(readr)
+library(pscl)
+library(MASS)
+library(ggplot2)
+
+#assign raw files link to variables
+
+ naloxone_rev2.link<-"https://raw.githubusercontent.com/TeamDemacian/prevention-targeting/master/data/naloxone_reversals_2017.csv"
+
+#get url data
+naloxone_rev2.csv <- getURL(naloxone_rev2.link)
+
+#read csv data
+naloxone_rev2 <- read_csv(naloxone_rev2.csv)
+
+View(naloxone_rev2)
+
+#plotting number of naloxone reversals by police coverage
+ggplot(naloxone_rev2, aes(Frequency, fill = Police_Coverage)) + geom_histogram(binwidth = 1) + facet_grid(Police_Coverage ~ 
+    ., margins = TRUE, scales = "free")+
+  labs(x = "Number of Naloxone Reversals", y = "Frequency")
+
+m1 <- zeroinfl(Frequency ~ Police_Coverage,
+  data = naloxone_rev2, dist = "negbin", EM = TRUE)
+summary(m1)
+
+#summary(m1 <- glm.nb(Frequency ~ County , data = naloxone_rev2))
+
+
+
+
+```
